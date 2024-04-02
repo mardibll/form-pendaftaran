@@ -33,7 +33,16 @@ const ListItem = (props: Props) => {
               item.kodePos}
           </Texts>
         </View>
-        {item.facebook && <Texts>{item.facebook}</Texts>}
+        {item.facebook && (
+          <View
+            style={[
+              styles.contactItem,
+              {justifyContent: 'flex-end', marginRight: '-30%'},
+            ]}>
+            <Texts style={{marginRight: 8}}>{item.facebook}</Texts>
+            <Icons name="facebook" color="#656360" size={20} />
+          </View>
+        )}
       </View>
       <View style={styles.jumlahSiswa}>
         <Texts>{item.jumlahSiswa}</Texts>

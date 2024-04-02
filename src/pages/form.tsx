@@ -93,6 +93,7 @@ const Form = (props: Props) => {
       addItem(Inputan)
         .then(() => {
           setisLoading(false);
+          props.navigation.goBack();
         })
         .catch(() => setisLoading(false));
     }

@@ -2,17 +2,21 @@ import React, {useEffect, useState} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 import {Appbar, Floating, ListItem, Nodata} from '../components';
 import {getList} from '../utils/services';
+import {useIsFocused} from '@react-navigation/native';
 
 type Props = {
   navigation: any;
 };
 
 const List = (props: Props) => {
+  const isFocused = useIsFocused();
   const [Items, setItems] = useState([]);
   const [isLoading, setisLoading] = useState(false);
   useEffect(() => {
-    getData();
-  }, []);
+    if (isFocused) {
+      getData();
+    }
+  }, [isFocused]);
 
   const getData = () => {
     setisLoading(true);
