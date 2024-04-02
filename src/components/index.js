@@ -6,6 +6,7 @@ import Icons from './icons';
 import ListItem from './listItem';
 import Floating from './floating';
 import Appbar from './appbar';
+import Nodata from './nodata';
 export {
   Textinputs,
   Texts,
@@ -15,4 +16,5 @@ export {
   ListItem,
   Floating,
   Appbar,
+  Nodata,
 };
