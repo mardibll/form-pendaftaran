@@ -138,6 +138,7 @@ const Form = (props: Props) => {
               onChangeText={val => handlerChange('kodePos', val)}
               maxLength={5}
               error={errors.kodePos}
+              keyboardType="numeric"
             />
             <Dropdown
               placeholder="Pilih Provinsi"
@@ -170,6 +171,7 @@ const Form = (props: Props) => {
               value={Inputan.emailSekolah}
               onChangeText={val => handlerChange('emailSekolah', val)}
               error={errors.emailSekolah}
+              keyboardType="email-address"
             />
             <Textinputs
               option={true}
@@ -183,6 +185,7 @@ const Form = (props: Props) => {
               value={Inputan.jumlahSiswa}
               onChangeText={val => handlerChange('jumlahSiswa', val)}
               error={errors.jumlahSiswa}
+              keyboardType="numeric"
             />
           </View>
           <Buttons loading={isLoading} title="Submit" onPress={onSubmit} />
