@@ -1,4 +1,4 @@
-import {StyleSheet, TouchableOpacity} from 'react-native';
+import {ActivityIndicator, StyleSheet, TouchableOpacity} from 'react-native';
 import React from 'react';
 import Texts from './texts';
 
@@ -7,12 +7,16 @@ type Props = {
   title: string;
   btnStyle: any;
   textStyle: any;
+  loading: boolean;
 };
 
 const Buttons = (props: Props) => {
-  const {onPress, title, btnStyle, textStyle} = props;
+  const {onPress, loading, title, btnStyle, textStyle} = props;
   return (
     <TouchableOpacity style={[styles.btn, btnStyle]} onPress={onPress}>
+      {loading && (
+        <ActivityIndicator color="#FFF" size={20} style={styles.load} />
+      )}
       <Texts style={[styles.textBtn, textStyle]}>{title}</Texts>
     </TouchableOpacity>
   );
@@ -34,8 +38,10 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     justifyContent: 'center',
     alignItems: 'center',
+    flexDirection: 'row',
   },
   textBtn: {
     color: '#FFF',
   },
+  load: {marginRight: 10},
 });

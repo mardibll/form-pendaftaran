@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {Platform, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {Appbar, Buttons, Dropdown, Textinputs} from '../components';
-import {fetchCity, fetchProvinsi} from '../utils/services';
+import {addItem, fetchCity, fetchProvinsi} from '../utils/services';
 import {typesSchool} from '../utils/data';
+import {validate} from '../utils/validate';
 
 type Props = {
   errors: string;
@@ -29,6 +30,7 @@ type Shows = {
 const Form = (props: Props) => {
   const [provinsis, setProvinsis] = useState([]);
   const [city, setCity] = useState([]);
+  const [isLoading, setisLoading] = useState(false);
 
   const [shows, setShows] = useState<Shows>({
     types: false,
@@ -84,9 +86,16 @@ const Form = (props: Props) => {
   };
 
   const onSubmit = () => {
-    if (Inputan) {
+    const [errorsState, isValid] = validate(Inputan);
+    setErrors(errorsState);
+    if (isValid) {
+      setisLoading(true);
+      addItem(Inputan)
+        .then(() => {
+          setisLoading(false);
+        })
+        .catch(() => setisLoading(false));
     }
-    console.log(Inputan);
   };
 
   return (
@@ -153,7 +162,7 @@ const Form = (props: Props) => {
               label="No Telepon Sekolah"
               value={Inputan.telpSekolah}
               onChangeText={val => handlerChange('telpSekolah', val)}
-              error={errors.kodePos}
+              error={errors.telpSekolah}
             />
             <Textinputs
               label="Email Sekolah"
@@ -175,7 +184,7 @@ const Form = (props: Props) => {
               error={errors.jumlahSiswa}
             />
           </View>
-          <Buttons title="Submit" onPress={onSubmit} />
+          <Buttons loading={isLoading} title="Submit" onPress={onSubmit} />
         </View>
       </ScrollView>
     </View>
